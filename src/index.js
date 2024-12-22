@@ -2,6 +2,5 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from './components/app';
-
 const rootElement = document.querySelector('.todoapp');
 ReactDOM.createRoot(rootElement).render(<App />);
