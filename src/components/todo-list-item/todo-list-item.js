@@ -1,21 +1,21 @@
-import React from 'react';
-import { formatDistanceToNow } from 'date-fns';
-import './todo-list-item.css';
+import React from 'react'
+import { formatDistanceToNow } from 'date-fns'
+import './todo-list-item.css'
 
 export default class TodoListItem extends React.Component {
   render() {
-    const { label, id, important, done, created } = this.props;
+    const { label, id, important, done, created } = this.props
 
-    let className = 'todo-list-label';
+    let className = 'todo-list-label'
     if (done) {
-      className += ' done';
+      className += ' done'
     }
 
     if (important) {
-      className += ' important';
+      className += ' important'
     }
 
-    const checkboxId = `todo-item-${id}`;
+    const checkboxId = `todo-item-${id}`
 
     return (
       <div className="todo-list-item">
@@ -35,6 +35,6 @@ export default class TodoListItem extends React.Component {
           </button>
         </div>
       </div>
-    );
+    )
   }
 }

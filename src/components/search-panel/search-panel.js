@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import './search-panel.css';
+import React, { useState } from 'react'
+import './search-panel.css'
 const SearchPanel = ({ addItem }) => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState('')
 
   const handleInputChange = (evt) => {
-    setInputValue(evt.target.value);
-  };
+    setInputValue(evt.target.value)
+  }
 
   const handleKeyDown = (evt) => {
     if (evt.key === 'Enter' && inputValue.trim() !== '') {
-      addItem(inputValue);
-      setInputValue('');
+      addItem(inputValue)
+      setInputValue('')
     }
-  };
+  }
   return (
     <input
       className="new-todo"
@@ -21,7 +21,7 @@ const SearchPanel = ({ addItem }) => {
       onChange={handleInputChange}
       onKeyDown={handleKeyDown}
     />
-  );
-};
+  )
+}
 
-export default SearchPanel;
+export default SearchPanel

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './item-status-filter.css';
+import React from 'react'
+import PropTypes from 'prop-types'
+import './item-status-filter.css'
 
 export default class ItemStatusFilter extends React.Component {
   render() {
-    const { toDo, done, filter } = this.props;
+    const { toDo, done, filter } = this.props
 
     return (
       <div className="footer">
@@ -44,7 +44,7 @@ export default class ItemStatusFilter extends React.Component {
           </ul>
         </div>
       </div>
-    );
+    )
   }
 }
 ItemStatusFilter.defaultProps = {
@@ -55,7 +55,7 @@ ItemStatusFilter.defaultProps = {
   onActive: () => {},
   onDone: () => {},
   onClear: () => {},
-};
+}
 
 ItemStatusFilter.propTypes = {
   toDo: PropTypes.number,
@@ -65,4 +65,4 @@ ItemStatusFilter.propTypes = {
   onActive: PropTypes.func,
   onDone: PropTypes.func,
   onClear: PropTypes.func,
-};
+}

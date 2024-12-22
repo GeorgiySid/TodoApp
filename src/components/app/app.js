@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
-import './app.css';
+import './app.css'
 
-import AppHeader from '../app-header';
-import SearchPanel from '../search-panel';
-import TodoList from '../todo-list';
-import ItemStatusFilter from '../item-status-filter';
+import AppHeader from '../app-header'
+import SearchPanel from '../search-panel'
+import TodoList from '../todo-list'
+import ItemStatusFilter from '../item-status-filter'
 
 export default class App extends React.Component {
-  maxId = 100;
+  maxId = 100
 
   state = {
     todoData: [
@@ -18,18 +18,18 @@ export default class App extends React.Component {
     ],
     originalTodoData: [],
     filter: 'all',
-  };
+  }
 
   componentDidMount() {
-    this.setState({ originalTodoData: [...this.state.todoData] });
+    this.setState({ originalTodoData: [...this.state.todoData] })
   }
 
   deleteItem = (id) => {
     this.setState((prevState) => {
-      const newTodoData = prevState.todoData.filter((item) => item.id !== id);
-      return { todoData: newTodoData };
-    });
-  };
+      const newTodoData = prevState.todoData.filter((item) => item.id !== id)
+      return { todoData: newTodoData }
+    })
+  }
 
   createTodoItem(label) {
     return {
@@ -38,75 +38,75 @@ export default class App extends React.Component {
       done: false,
       id: this.maxId++,
       created: new Date(),
-    };
+    }
   }
 
   addItem = (text) => {
-    const newItem = this.createTodoItem(text);
+    const newItem = this.createTodoItem(text)
 
     this.setState(({ todoData }) => {
-      const newArr = [...todoData, newItem];
+      const newArr = [...todoData, newItem]
 
       return {
         todoData: newArr,
-      };
-    });
-  };
+      }
+    })
+  }
 
   toggleProperty(arr, id, propName) {
-    const idx = arr.findIndex((el) => el.id === id);
+    const idx = arr.findIndex((el) => el.id === id)
 
-    const oldItem = arr[idx];
-    const newItem = { ...oldItem, [propName]: !oldItem[propName] };
+    const oldItem = arr[idx]
+    const newItem = { ...oldItem, [propName]: !oldItem[propName] }
 
-    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)];
+    return [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
   }
 
   onToggleImportant = (id) => {
     this.setState((prevState) => {
-      const newTodoData = this.toggleProperty(prevState.todoData, id, 'important');
-      return { todoData: newTodoData };
-    });
-  };
+      const newTodoData = this.toggleProperty(prevState.todoData, id, 'important')
+      return { todoData: newTodoData }
+    })
+  }
 
   onToggleDone = (id) => {
     this.setState((prevState) => {
-      const newTodoData = this.toggleProperty(prevState.todoData, id, 'done');
-      return { todoData: newTodoData };
-    });
-  };
+      const newTodoData = this.toggleProperty(prevState.todoData, id, 'done')
+      return { todoData: newTodoData }
+    })
+  }
 
   setFilter = (filter) => {
-    this.setState({ filter });
-  };
+    this.setState({ filter })
+  }
 
   allFilter = () => {
     this.setState(() => {
-      return { filter: 'all' };
-    });
-  };
+      return { filter: 'all' }
+    })
+  }
 
   clearCompleted = () => {
     this.setState(({ todoData }) => {
       return {
         todoData: todoData.filter((el) => !el.done),
-      };
-    });
-  };
+      }
+    })
+  }
 
   render() {
-    const { todoData, filter } = this.state;
-    let filteredItems = [...todoData];
+    const { todoData, filter } = this.state
+    let filteredItems = [...todoData]
 
     if (filter === 'active') {
-      filteredItems = todoData.filter((el) => !el.done);
+      filteredItems = todoData.filter((el) => !el.done)
     }
     if (filter === 'done') {
-      filteredItems = todoData.filter((el) => el.done);
+      filteredItems = todoData.filter((el) => el.done)
     }
 
-    const doneCount = this.state.todoData.filter((el) => el.done).length;
-    const todoCount = this.state.todoData.length - doneCount;
+    const doneCount = this.state.todoData.filter((el) => el.done).length
+    const todoCount = this.state.todoData.length - doneCount
 
     return (
       <div className="main">
@@ -130,6 +130,6 @@ export default class App extends React.Component {
           onClear={this.clearCompleted}
         />
       </div>
-    );
+    )
   }
 }

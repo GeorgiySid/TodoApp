@@ -11,12 +11,10 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": 12,
-    "sourceType": "module"
+  "parserOptions": { 
+    "ecmaFeatures": { "jsx": true }, 
+    "ecmaVersion": "latest", 
+    "sourceType": "module" 
   },
   "plugins": ["react", "prettier", "import"],
   "rules": {
