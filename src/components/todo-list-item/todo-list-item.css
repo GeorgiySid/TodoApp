@@ -59,3 +59,14 @@
   top: 20px;
   right: 100px;
 }
+
+.timerCont{
+  width: 150px;
+  position: absolute;
+  top:50px;
+  right: 0;
+}
+
+.timer{
+  padding-left: 5px;
+}

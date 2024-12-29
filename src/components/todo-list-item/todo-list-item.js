@@ -3,6 +3,12 @@ import { formatDistanceToNow } from 'date-fns'
 import './todo-list-item.css'
 
 export default class TodoListItem extends React.Component {
+  formatTime = (timeInSeconds) => {
+    const hours = Math.floor(timeInSeconds / 3600)
+    const minutes = Math.floor((timeInSeconds % 3600) / 60)
+    const seconds = Math.floor(timeInSeconds % 60)
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
+  }
   render() {
     const { label, id, important, done, created } = this.props
 
@@ -33,6 +39,26 @@ export default class TodoListItem extends React.Component {
           <button type="button" className="btn btn-outline-danger" onClick={this.props.onDeleted}>
             <i className="fa fa-trash" />
           </button>
+          <div className="timerCont">
+            {this.props.isRunning ? (
+              <button
+                type="button"
+                className="btn btn-outline-warning btn-sm float-right"
+                onClick={this.props.onStopTimer}
+              >
+                Stop
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-outline-info btn-sm float-right"
+                onClick={this.props.onStartTimer}
+              >
+                Start
+              </button>
+            )}
+            <span className="timer">{this.formatTime(this.props.elapsedTime)}</span>
+          </div>
         </div>
       </div>
     )
