@@ -36,7 +36,8 @@ export default class App extends React.Component {
     })
   }
 
-  createTodoItem(label) {
+  createTodoItem(label, min = 0, sec = 0) {
+    const totalSecond = min * 60 + sec
     return {
       label,
       important: false,
@@ -44,13 +45,13 @@ export default class App extends React.Component {
       id: this.maxId++,
       created: new Date(),
       timerStarted: null,
-      elapsedTime: 0,
+      elapsedTime: totalSecond,
       isRunning: false,
     }
   }
 
-  addItem = (text) => {
-    const newItem = this.createTodoItem(text)
+  addItem = (text, min = 0, sec = 0) => {
+    const newItem = this.createTodoItem(text, min, sec)
 
     this.setState(({ todoData }) => {
       const newArr = [...todoData, newItem]
@@ -73,8 +74,7 @@ export default class App extends React.Component {
     this.setState((prevState) => {
       const updatedTodoData = prevState.todoData.map((item) => {
         if (item.id === id) {
-          const elapsedTime = item.elapsedTime + (Date.now() - item.timerStarted) / 1000
-          return { ...item, isRunning: false, elapsedTime: elapsedTime, timerStarted: null }
+          return { ...item, isRunning: false, timerStarted: null }
         }
         return item
       })
@@ -85,9 +85,9 @@ export default class App extends React.Component {
   updateTimer = () => {
     this.setState((prevState) => {
       const updatedTodoData = prevState.todoData.map((item) => {
-        if (item.isRunning) {
-          const elapsedTime = item.elapsedTime + (Date.now() - item.timerStarted) / 1000
-          return { ...item, elapsedTime, timerStarted: Date.now() }
+        if (item.isRunning && item.elapsedTime > 0) {
+          const newElapsedTime = Math.max(item.elapsedTime - 1, 0)
+          return { ...item, elapsedTime: newElapsedTime }
         }
         return item
       })
